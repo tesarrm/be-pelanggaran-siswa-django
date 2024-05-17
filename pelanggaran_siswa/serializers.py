@@ -15,6 +15,8 @@ class KelasSerializer(serializers.ModelSerializer):
         fields = ['id', 'nama', 'tingkat', 'sekolah', 'catatan', 'count']
 
 class SiswaSerializer(serializers.ModelSerializer):
+    kelas = KelasSerializer()
+
     class Meta:
         model = Siswa
         fields = '__all__'
@@ -32,8 +34,10 @@ class UserSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class PelanggaranSerializer(serializers.ModelSerializer):
-    sekolah = SekolahSerializer()
-    petugas = UserSerializer()  # Assuming Petugas is a User, update this if different
+    # sekolah = SekolahSerializer()
+    # petugas = UserSerializer()  # Assuming Petugas is a User, update this if different
+    sekolah = SekolahSerializer(required=False)
+    petugas = UserSerializer(required=False)
     siswa = SiswaSerializer()
     kelas = KelasSerializer()
     kategori = PelanggaranKategoriSerializer()
