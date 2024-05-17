@@ -1,6 +1,7 @@
 # from django.shortcuts import render
 
 # # Create your views here.# views.py
+from django.db.models import Count
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -19,9 +20,10 @@ class SekolahViewSet(viewsets.ModelViewSet):
     # permission_classes = [IsSuperAdminOrReadOnly]
 
 class KelasViewSet(viewsets.ModelViewSet):
-    queryset = Kelas.objects.all()
+    queryset = Kelas.objects.annotate(count=Count('pelanggaran'))
     serializer_class = KelasSerializer
     # permission_classes = [IsSuperAdminOrReadOnly, IsPetugasOrReadOnly]
+
 
 class SiswaViewSet(viewsets.ModelViewSet):
     queryset = Siswa.objects.all()
@@ -42,6 +44,10 @@ class PelanggaranViewSet(viewsets.ModelViewSet):
     queryset = Pelanggaran.objects.all()
     serializer_class = PelanggaranSerializer
     # permission_classes = [IsSuperAdminOrReadOnly, IsPetugasOrReadOnly]
+
+class PelanggaranKategoriViewSet(viewsets.ModelViewSet):
+    queryset = PelanggaranKategori.objects.annotate(count=Count('pelanggaran'))
+    serializer_class = PelanggaranKategoriSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

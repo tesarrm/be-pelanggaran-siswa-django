@@ -103,15 +103,24 @@ class PelanggaranKategori(models.Model):
     def __str__(self):
         return self.nama
 
+# class Pelanggaran(models.Model):
+#     sekolah = models.ForeignKey(Sekolah, on_delete=models.CASCADE)
+#     tgl_jam = models.DateTimeField()
+#     petugas = models.ForeignKey(User, on_delete=models.CASCADE)
+#     siswa = models.ForeignKey(Siswa, on_delete=models.CASCADE)
+#     kelas = models.ForeignKey(Kelas, on_delete=models.CASCADE)
+#     kategori = models.ForeignKey(PelanggaranKategori, on_delete=models.CASCADE)
+#     poin = models.PositiveIntegerField()
+#     catatan = models.CharField(max_length=199, blank=True, null=True)
+
+#     def __str__(self):
+#         return f'{self.siswa} - {self.kategori}'
 class Pelanggaran(models.Model):
-    sekolah = models.ForeignKey(Sekolah, on_delete=models.CASCADE)
     tgl_jam = models.DateTimeField()
+    poin = models.IntegerField()
+    catatan = models.TextField()
+    sekolah = models.ForeignKey(Sekolah, on_delete=models.CASCADE)
     petugas = models.ForeignKey(User, on_delete=models.CASCADE)
     siswa = models.ForeignKey(Siswa, on_delete=models.CASCADE)
     kelas = models.ForeignKey(Kelas, on_delete=models.CASCADE)
     kategori = models.ForeignKey(PelanggaranKategori, on_delete=models.CASCADE)
-    poin = models.PositiveIntegerField()
-    catatan = models.CharField(max_length=199, blank=True, null=True)
-
-    def __str__(self):
-        return f'{self.siswa} - {self.kategori}'

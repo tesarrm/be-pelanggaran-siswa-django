@@ -8,9 +8,11 @@ class SekolahSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class KelasSerializer(serializers.ModelSerializer):
+    count = serializers.IntegerField(read_only=True)
+
     class Meta:
         model = Kelas
-        fields = '__all__'
+        fields = ['id', 'nama', 'tingkat', 'sekolah', 'catatan', 'count']
 
 class SiswaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,16 +20,24 @@ class SiswaSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class PelanggaranKategoriSerializer(serializers.ModelSerializer):
+    count = serializers.IntegerField(read_only=True)
     class Meta:
         model = PelanggaranKategori
-        fields = '__all__'
+        fields = ['id', 'nama', 'poin', 'pesan', 'catatan', 'count']
 
-class PelanggaranSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Pelanggaran
-        fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User 
+        fields = '__all__'
+
+class PelanggaranSerializer(serializers.ModelSerializer):
+    sekolah = SekolahSerializer()
+    petugas = UserSerializer()  # Assuming Petugas is a User, update this if different
+    siswa = SiswaSerializer()
+    kelas = KelasSerializer()
+    kategori = PelanggaranKategoriSerializer()
+
+    class Meta:
+        model = Pelanggaran
         fields = '__all__'
