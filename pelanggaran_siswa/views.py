@@ -9,6 +9,8 @@ from django.contrib.auth import authenticate, login, logout
 from rest_framework import viewsets
 from .models import User, Sekolah, Kelas, Siswa, PelanggaranKategori, Pelanggaran
 from .serializers import UserSerializer, SekolahSerializer, KelasSerializer, SiswaSerializer,  PelanggaranKategoriSerializer, PelanggaranSerializer
+from rest_framework.permissions import IsAuthenticated
+
 # from .permissions import IsSuperAdmin, IsSuperAdminOrReadOnly, IsPetugasOrReadOnly, IsSiswaOrReadOnly, IsPetugas, IsSiswa
 
 class SekolahViewSet(viewsets.ModelViewSet):
@@ -73,3 +75,11 @@ class UserLogout(APIView):
         logout(request)
         return Response(status=status.HTTP_200_OK)
 
+
+class UserDetail(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        serializer = UserSerializer(user)
+        return Response(serializer.data)

@@ -1,8 +1,8 @@
 # sekolah_app/urls.py
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import UserViewSet, SekolahViewSet, KelasViewSet, SiswaViewSet, PelanggaranKategoriViewSet, PelanggaranViewSet 
-from .views import UserRegistration, UserLogin, UserLogout
+from .views import  UserViewSet, SekolahViewSet, KelasViewSet, SiswaViewSet, PelanggaranKategoriViewSet, PelanggaranViewSet 
+from .views import UserDetail, UserRegistration, UserLogin, UserLogout
 
 router = DefaultRouter()
 router.register(r'sekolah', SekolahViewSet)
@@ -18,6 +18,7 @@ urlpatterns = [
     path('register/', UserRegistration.as_view(), name='register'),
     path('login/', UserLogin.as_view(), name='login'),
     path('logout/', UserLogout.as_view(), name='logout'),
+    path('me/', UserDetail.as_view(), name='me'),
 ]
 
 # urls.py
