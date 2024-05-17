@@ -41,10 +41,10 @@ class PelanggaranViewSet(viewsets.ModelViewSet):
     serializer_class = PelanggaranSerializer
     # permission_classes = [IsSuperAdminOrReadOnly, IsPetugasOrReadOnly]
 
-# class SuperAdminViewSet(viewsets.ModelViewSet):
-#     queryset = SuperAdmin.objects.all()
-#     serializer_class = SuperAdminSerializer
-#     permission_classes = [IsSuperAdmin]
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    # permission_classes = [IsSuperAdmin]
 
 
 class UserRegistration(APIView):

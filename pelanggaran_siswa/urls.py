@@ -1,7 +1,7 @@
 # sekolah_app/urls.py
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import SekolahViewSet, KelasViewSet, SiswaViewSet, PelanggaranKategoriViewSet, PelanggaranViewSet 
+from .views import UserViewSet, SekolahViewSet, KelasViewSet, SiswaViewSet, PelanggaranKategoriViewSet, PelanggaranViewSet 
 from .views import UserRegistration, UserLogin, UserLogout
 
 router = DefaultRouter()
@@ -11,7 +11,7 @@ router.register(r'siswa', SiswaViewSet)
 # router.register(r'petugas', PetugasViewSet)
 router.register(r'pelanggaran_kategori', PelanggaranKategoriViewSet)
 router.register(r'pelanggaran', PelanggaranViewSet)
-# router.register(r'user', UserViewSet)
+router.register(r'user', UserViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
